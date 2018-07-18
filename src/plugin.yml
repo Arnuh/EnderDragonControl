@@ -1,0 +1,7 @@
+name: EnderDragonControl
+main: com.codingforcookies.enderdragoncontrol.EnderDragonControl
+author: Borlea
+version: 1.0
+commands:
+   controltest:
+      description: Magic
