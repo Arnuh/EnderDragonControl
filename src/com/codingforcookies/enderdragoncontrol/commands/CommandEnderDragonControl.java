@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.codingforcookies.enderdragoncontrol.EnderDragonControl;
+import com.codingforcookies.enderdragoncontrol.IPhaseManager;
 import com.codingforcookies.enderdragoncontrol.phases.IPhaseHoldingPattern;
 import com.codingforcookies.enderdragoncontrol.phases.IPhaseLanding;
 import com.codingforcookies.enderdragoncontrol.phases.IPhaseLandingApproach;
@@ -35,14 +36,15 @@ public class CommandEnderDragonControl implements CommandExecutor{
 		try{
 			EnderDragonControl.setCustomMananger(dragon);
 			Location loc = new Location(p.getWorld(), 100, 60, 100);
-			((IPhaseHoldingPattern) EnderDragonControl.getPhaseManager(dragon).getPhase("HoldingPattern")).setPlayerArea(loc);
+			IPhaseManager manager = EnderDragonControl.getPhaseManager(dragon);
+			((IPhaseHoldingPattern) manager.getPhase("HoldingPattern")).setPlayerArea(loc);
 			Location high = loc.clone();
 			high.setY(120);
-			((IPhaseHoldingPattern) EnderDragonControl.getPhaseManager(dragon).getPhase("HoldingPattern")).setHoldingLocation(high);// shit no work
-			((IPhaseLanding) EnderDragonControl.getPhaseManager(dragon).getPhase("Landing")).setLandingLocation(high);
-			((IPhaseLandingApproach) EnderDragonControl.getPhaseManager(dragon).getPhase("LandingApproach")).setLandingLocation(high);
-			((IPhaseLandingApproach) EnderDragonControl.getPhaseManager(dragon).getPhase("LandingApproach")).setTargetingPlayers(true);
-			((IPhaseTakeoff) EnderDragonControl.getPhaseManager(dragon).getPhase("Takeoff")).setTargetLocation(high);
+			((IPhaseHoldingPattern) manager.getPhase("HoldingPattern")).setHoldingLocation(high);// shit no work
+			((IPhaseLanding) manager.getPhase("Landing")).setLandingLocation(high);
+			((IPhaseLandingApproach) manager.getPhase("LandingApproach")).setLandingLocation(high);
+			((IPhaseLandingApproach) manager.getPhase("LandingApproach")).setTargetingPlayers(true);
+			((IPhaseTakeoff) manager.getPhase("Takeoff")).setTargetLocation(high);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
